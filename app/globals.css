@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #ffffff;
+  --color-mist: #eef2f7;
+  --color-ink: #17233d;
+  --color-signal: #2447f5;
+  --color-signal-deep: #1a35c2;
+  --color-marigold: #ffb020;
+  --color-marigold-soft: #fff3d9;
+  --color-slate-soft: #5d6e8a;
+  --color-line: #dde5f0;
+  --color-hover: #9fb0cc;
+
+  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.display-font {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.code-font {
+  font-family: var(--font-code);
+}
+
+.paper-grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(23, 35, 61, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 35, 61, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 55%, transparent 100%);
+}
+
+.marigold-underline {
+  background-image: linear-gradient(to top, var(--color-marigold) 38%, transparent 38%);
+  padding: 0 0.1em;
+}
+
+/* Restrained motion: one entrance language, interaction answers action */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.reveal-lift:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-hover);
+}
+
+.reveal-press {
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.reveal-press:hover {
+  transform: translateY(-1px);
+}
+
+.reveal-press:active {
+  transform: translateY(0) scale(0.98);
+}
